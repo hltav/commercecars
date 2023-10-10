@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+//model para criar usuário do sistema
+model User {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  name         String
+  passwordHash String
+  admin        Boolean
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+}
+
+//model para criar os dados do interessado na compra
+model Conductor {
+  id          Int      @id @default(autoincrement())
+  name        String
+  cpf         String   @unique
+  rg          String
+  cnh         String   @unique
+  phone       String
+  address     String
+  houseNumber String
+  district    String
+  state       String
+  city        String
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+}
+
+// Modelo Category
+model Category {
+  id         Int       @id @default(autoincrement())
+  name       String
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  vehicles   Vehicle[] @relation("category_vehicles")
+}
+
+// Modelo Mark
+model Mark {
+  id         Int       @id @default(autoincrement())
+  name       String
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  vehicles   Vehicle[] @relation("mark_vehicles")
+}
+
+// Modelo Vehicle
+model Vehicle {
+  id         Int       @id @default(autoincrement())
+  chassis    String    @unique
+  plate      String    @unique
+  renavam    String    @unique
+  km         Int
+  model      String
+  uf         String
+  price      String
+  year       Int
+  markId     Int?
+  categoryId Int?
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  category   Category? @relation("category_vehicles", fields: [categoryId], references: [id])
+  mark       Mark?     @relation("mark_vehicles", fields: [markId], references: [id])
+}
