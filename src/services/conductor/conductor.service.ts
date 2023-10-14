@@ -12,6 +12,7 @@ export class ConductorService {
       const conductor = await this.prisma.conductor.findUnique({
         where: { id },
       })
+
       if (!conductor) {
         throw new NotFoundException('Conductor not found')
       }
@@ -51,10 +52,10 @@ export class ConductorService {
       })
     } catch (error) {
       if (error instanceof NotFoundException) {
-        throw error 
+        throw error
       }
-      
-      throw new Error('Internal Server Error') 
+
+      throw new Error('Internal Server Error')
     }
   }
 
@@ -66,10 +67,10 @@ export class ConductorService {
       })
     } catch (error) {
       if (error instanceof NotFoundException) {
-        throw error 
+        throw error
       }
-     
-      throw new Error('Internal Server Error') 
+
+      throw new Error('Internal Server Error')
     }
   }
 }
