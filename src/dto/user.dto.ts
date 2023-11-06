@@ -13,12 +13,12 @@ export class CreateUsersDto {
   @IsNotEmpty()
   password: string
 
+  @IsOptional()
   @IsBoolean()
   admin: boolean
 }
 
 export class UpdateUsersDto {
- 
   @IsString()
   @IsNotEmpty()
   @IsOptional()
@@ -28,6 +28,4 @@ export class UpdateUsersDto {
   @IsNotEmpty()
   @IsOptional()
   password: string
-
- 
 }

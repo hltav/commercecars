@@ -52,6 +52,7 @@ export class UserService {
       })
       return user
     } catch (error) {
+      console.log(error)
       throw error
     }
   }
@@ -67,7 +68,7 @@ export class UserService {
           name: createUsersDto.name,
           email: createUsersDto.email,
           passwordHash: hashedPassword,
-          admin: createUsersDto.admin,
+          admin: createUsersDto.admin || false,
         },
       })
 
@@ -79,6 +80,7 @@ export class UserService {
 
       return filteredUser
     } catch (error) {
+      console.log(error)
       if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002') {
         throw new ConflictException('Email already exists')
       }
