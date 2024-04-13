@@ -16,7 +16,7 @@ export class ConductorService {
       if (!conductor) {
         throw new NotFoundException('Conductor not found')
       }
-      return conductor
+      return 
     } catch (error) {
       if (error instanceof NotFoundException) {
         throw error
@@ -73,4 +73,5 @@ export class ConductorService {
       throw new Error('Internal Server Error')
     }
   }
+    
 }

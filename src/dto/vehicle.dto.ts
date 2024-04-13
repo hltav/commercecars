@@ -56,6 +56,11 @@ export class UpdateVehicleDto {
   @IsOptional()
   uf?: string
 
+  @IsString()
+  @IsOptional()
+  @Matches(/^[0-9]+$/, { message: 'Price deve conter apenas dígitos numéricos' })
+  price: string
+
   @IsInt()
   @IsOptional()
   markId?: number

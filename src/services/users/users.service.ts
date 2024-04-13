@@ -47,12 +47,12 @@ export class UserService {
 
   async findUserByEmail(email: string): Promise<any> {
     try {
-      const user = await this.prisma.user.findFirst({
-        where: { email },
+      const user = await this.prisma.user.findUnique({
+        where: { email},
       })
+
       return user
     } catch (error) {
-      console.log(error)
       throw error
     }
   }
@@ -80,12 +80,13 @@ export class UserService {
 
       return filteredUser
     } catch (error) {
-      console.log(error)
+    
       if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2002') {
         throw new ConflictException('Email already exists')
       }
 
       throw new Error('Internal Server Error')
+     
     }
   }
 

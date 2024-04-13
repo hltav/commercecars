@@ -29,7 +29,13 @@ export class ConductorController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.conductorService.deleteConductor(+id)
+  delete(@Param('id') id: number) {
+    /* return this.conductorService.deleteConductor(+id) */
+    const deleted = this.conductorService.deleteConductor(+id)
+    if (deleted) {
+      return { message: 'Item removido com sucesso' }
+    } else {
+      return { message: 'Item não encontrado' }
+    }
   }
 }

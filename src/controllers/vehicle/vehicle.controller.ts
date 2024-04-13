@@ -29,7 +29,7 @@ export class VehicleController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove(@Param('id') id: number) {
     return this.vehicleService.deleteVehicle(+id)
   }
 }
